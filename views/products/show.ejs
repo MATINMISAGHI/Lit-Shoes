@@ -1,0 +1,369 @@
+<%- include ("../partials/header") %>
+
+<div class="row">
+    <div class="col-md-3 col-sm-3">
+        <p class="lead text-center"> <%= product.location %> </p>
+        <div class="list-group mb-2">
+            <li class="list-group-item bg-light"><span class="text-left">Temperature:</span> <span
+                    class="float-right"><%= weatherData.main.temp %> ˚F </span></li>
+            <li class="list-group-item bg-light"><span class="text-left">Weather Condition:</span> <span
+                    class="float-right"><%= weatherData.weather[0].description %> </span></li>
+            <li class="list-group-item bg-light"><span class="text-left">Wind Speed:</span> <span
+                    class="float-right"><%= weatherData.wind.speed %> mph </span></li>
+            <li class="list-group-item bg-light"><span class="text-left">Humidity:</span> <span
+                    class="float-right"><%= weatherData.main.humidity %>% </span></li>
+            <li class="list-group-item bg-light"><span class="text-left">Pressure:</span> <span
+                    class="float-right"><%= weatherData.main.pressure %> hPa </span></li>
+        </div>
+        <div class="d-none d-sm-block" id="map"></div>
+    </div>
+
+
+    <div class="col-md-9 col-sm-9">
+        <div class="card mb-1">
+            <img class="card-img-top" src="<%= product.image %>" alt="image of <%= product.name %>">
+            <div class="card-body">
+                <h5 class="float-right">
+                    $<%= product.price %>/night
+                </h5>
+                <h5 class="card-title"><%= product.name %></h5>
+                <div class="float-right">
+                    <button type="button" class="badge badge-success badge-pill" data-toggle="modal"
+                        data-target="#productLikes">
+                        <span>Total likes: <i class="far fa-thumbs-up"></i> <%= product.likes.length %></span>
+                    </button>
+                </div>
+                <div class="pb-10">
+                    <form action="/products/<%= product.slug %>/like" method="POST">
+                        <div class="btn-group">
+                            <% if (currentUser && product.likes.some(function (like) {
+                                return like.equals(currentUser._id)
+                            })) { %>
+                            <button class="btn btn-sm btn-success">
+                                <i class="far fa-thumbs-up"></i> Liked (<%= product.likes.length %>)
+                            </button>
+                            <% } else { %>
+                            <button class="btn btn-sm btn-outline-success">
+                                <i class="far fa-thumbs-up"></i> Like (<%= product.likes.length %>)
+                            </button>
+                            <% } %>
+                        </div>
+                    </form>
+                </div>
+                <p>
+                    <em>
+                        Submitted by:
+                        <% console.log(product.author.avatar) %>
+                        <img src="<%= product.author.avatar %>">
+                        <strong><a href="/users/<%= product.author.id %>">
+                                <%= product.author.username %></a></strong>,
+                        <%= moment(product.createdAt).fromNow() %>
+                    </em>
+                </p>
+                <hr>
+                <p class="card-text no-wrap"><%= product.description %></p>
+                <% if(currentUser && product.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                <label for="editProduct" class="sr-only">Edit </label>
+                <a id="editBTN" class="btn btn-sm btn-warning btnColorFix" href="/products/<%= product.slug %>/edit"
+                    role="button"> Edit </a>
+                <form action="/products/<%= product.slug %>?_method=DELETE" method="POST" class="delete-form">
+                    <label for="dltProduct" class="sr-only">Delete </label>
+                    <button id="dltProduct" class="btn-sm btn-danger">Delete</button>
+                </form>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar bg-dark mx-auto" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                aria-valuemax="100" style="width: 100%;"></div>
+        </div>
+
+        <!--COMMENT SECTION START-->
+        <div class="card mt-1">
+            <div class="card-body">
+                <!--Setting up the add new comment button that is used for collapsing-->
+                <div>
+                    <label for="newComment" class="sr-only">Add New Comment</label>
+                    <a id="newComment" class="btn btn-outline-success float-right" role="button" data-toggle="collapse"
+                        href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
+                        <span aria-hidden="true"> <i class="fas fa-feather-alt"></i> </span> Add New Comment</a>
+                    <!--Comment section title-->
+                    <h4><strong>Comments <span aria-hidden="true"> <i class="far fa-comments"></i> </span></strong></h4>
+                </div>
+
+                <!--Collapse Add a comment form START-->
+                <div class="collapse pt-2 col-10" id="collapseComment">
+                    <div class="card p-2" style="border-left: 5px solid #28a745;">
+                        <div class="card-body">
+                            <% if(!currentUser) { %>
+                            <!--If the user is not logged in, direct him to the login page-->
+                            <h6>You need to login before you can comment. <a href="/login">Click here</a> to go to the
+                                login page.</h6>
+                            <% } %>
+                            <% if(currentUser) { %>
+                            <!--If the user is logged in, show the new comment form-->
+                            <div class="card-title">
+                                <h4> <span aria-hidden="true"> <i class="fas fa-signature"></i></span> your comment
+                                </h4>
+                            </div>
+                            <div class="card-text">
+                                <form id="add-comment-form" action="/products/<%= product.slug %>/comments"
+                                    method="POST">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" disabled
+                                            value="<%= currentUser.username %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="comment[text]"
+                                            placeholder="Write your comment..." form="add-comment-form" rows="3"
+                                            col="70"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-success btn-sm">Post Comment</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <!--Collapse Add a comment form END-->
+
+                <hr>
+                <!--Check if there are comments, if there are none say no comments.-->
+                <% if (product.comments.length === 0) { %>
+                <p class="text-muted"><em>No comments yet!</em></p>
+                <% } %>
+                <!--Display comments by looping through them-->
+                <div class="row">
+                    <% product.comments.forEach(function(comment){ %>
+                    <div class="col-md-12 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="float-left">
+                                    <p class="card-title"><a href="/users/<%= comment.author.id %>"><img
+                                                src="<%= comment.author.avatar %>">
+                                            <%= comment.author.username %></a></p>
+                                    <% console.log(comment.author.username) %>
+                                    <p class="card-text no-wrap"><%= comment.text %></p>
+                                </div>
+                                <br>
+                                <div class="float-right">
+                                    <p><%= moment(comment.createdAt).calendar() %></p>
+                                    <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                                    <!--Edit button used for collapsing the edit comment form-->
+                                    <label for="editComment" class="sr-only">Edit Comment</label>
+                                    <a id="editComment" class="btnColorFix btn btn-sm btn-warning p-0" role="button"
+                                        data-toggle="collapse" href="#collapseEdit<%= comment._id %>"
+                                        aria-expanded="false" aria-controls="collapse<%= comment._id %>">
+                                        Edit</a>
+                                    <!--Delete comment button-->
+                                    <form class="delete-form"
+                                        action="/products/<%=product.slug%>/comments/<%=comment._id%>?_method=DELETE"
+                                        method="POST">
+                                        <label for="dltComment" class="sr-only">Delete Comment</label>
+                                        <button id="dltComment" class="btn btn-sm btn-danger p-0">Delete</button>
+                                    </form>
+                                    <!--Edit comment form-->
+                                    <div class="collapse col-md-10 float-left" id="collapseEdit<%= comment._id %>">
+                                        <div class="card p-2" style="border-left: 5px solid #ffbb33; margin-top: 15px;">
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h4>Edit your comment <span aria-hidden="true"><i
+                                                                class="far fa-edit"></i></span></h4>
+                                                </div>
+                                                <div class="card-text">
+                                                    <form id="edit-comment-form<%= comment._id %>"
+                                                        action="/products/<%= product.slug %>/comments/<%= comment._id %>?_method=PUT"
+                                                        method="POST">
+                                                        <div class="form-group">
+                                                            <input class="form-control" type="text" disabled
+                                                                value="<%= currentUser.username %>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" name="comment[text]"
+                                                                placeholder="Your comment text..."
+                                                                form="edit-comment-form<%= comment._id %>" rows="3"
+                                                                cols="70"><%= comment.text %></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button class="btn btn-outline-warning btn-sm">Edit comment
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+        <!--COMMENT SECTION END-->
+
+        <div class="progress">
+            <div class="progress-bar bg-dark mx-auto " role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                aria-valuemax="100" style="width: 100%;"></div>
+        </div>
+
+        <!--Rating & Review section-->
+        <div class="row">
+            <div class="col-md-12 my-1">
+                <div class="card">
+                    <div class="card-body">
+                        <% if (product.rating === 0) { %>
+                        <h5 class="text-muted">
+                            <em>No reviews yet.</em>
+                        </h5>
+                        <% } else { %>
+                        <p>
+                            <span class="fas fa-star checked"></span>
+                            <span
+                                class="fas fa-star <% if (product.rating > 1.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                            <span
+                                class="fas fa-star <% if (product.rating > 2.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                            <span
+                                class="fas fa-star <% if (product.rating > 3.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                            <span
+                                class="fas fa-star <% if (product.rating > 4.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                            <em>(total reviews: <%= product.reviews.length %>)</em>
+                        </p>
+                        <p>
+                            Current product rating: <strong><%= product.rating.toFixed(2) %></strong>
+                        </p>
+                        <p class="card-title">
+                        <h4>Latest reviews for this shoe:</h4>
+                        </p>
+                        <hr class="mt-0">
+                        <div class="card-text">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <% product.reviews.slice(0, 5).forEach(function(review){ %>
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <div class="float-left col-md-9">
+                                                <%- '<span class="fas fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="far fa-star"></span>'.repeat(5 - review.rating) %>
+                                                <div class="card-title">Review by:
+                                                    <strong><%= review.author.username %></strong></div>
+                                                <p class="no-wrap float-left card-text">
+                                                    <%= review.text %>
+                                                </p>
+                                            </div>
+                                            <div class="float-right">
+                                                <span><em><%= review.updatedAt.toDateString() %></em></span>
+                                                <div class="pt-3">
+                                                    <% if(currentUser && review.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                                                    <a class="btn btn-sm btn-warning p-0" id="reviewColorFix"
+                                                        href="/products/<%=product.slug %>/reviews/<%=review._id %>/edit">Edit</a>
+                                                    <form id="delete-form"
+                                                        action="/products/<%=product.slug %>/reviews/<%=review._id %>?_method=DELETE"
+                                                        method="POST">
+                                                        <input type="submit" class="btn btn-sm btn-danger p-0"
+                                                            value="Delete">
+                                                    </form>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="mb-3">
+                                            <h4><a href="/products/<%= product.slug %>/reviews"><i class="fas fa-search"
+                                                        aria-hidden="true"></i> See
+                                                    all reviews</a></h4>
+                                        </div>
+                                        <% } %>
+                                        <div class="mb-2">
+                                            <a class="btn btn-outline-success <% if (currentUser && product.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
+                                                href="/products/<%= product.slug %>/reviews/new">
+                                                Write a New Review</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-signin my-3 ">
+    <a href="/products">Go Back</a>
+</div>
+<!-- Likes Modal-->
+<div id="productLikes" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> likes: <%= product.likes.length %></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Liked by:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% product.likes.forEach(function(like) { %>
+                        <tr>
+                            <td><span class="badge"><i class="fas fa-user"></i></span> <%= like.username %></td>
+                        </tr>
+                        <% }); %>
+                        <% if (product.likes.length === 0) { %>
+                        <tr>
+                            <td><em>No likes yet.</em></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function initMap() {
+        var lat = <%= product.lat %>;
+        var lng = <%= product.lng %>;
+        var center = { lat: lat, lng: lng };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: center,
+            scrollwheel: false
+        });
+        var contentString = `
+            <strong><%= product.name %><br />
+            <%= product.location %></strong>
+            <p><%= product.description %></p>
+            `
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        var marker = new google.maps.Marker({
+            position: center,
+            map: map
+        });
+        marker.addListener('click', function () {
+            infowindow.open(map, marker);
+        });
+    }        
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDf0df1HplBE7r-8YMuNncPXKGY-OqeiF8&callback=initMap"></script>
+
+<%- include ("../partials/footer") %>

@@ -1,0 +1,138 @@
+body {
+    background-color: darkslategrey;
+}
+
+#landing-header {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding-top: 40vh;
+}
+
+#landing-header h1 {
+    padding: 1vh;
+    font-size: 3rem;
+    text-shadow: 1px 1px 4px rgba(92, 16, 39, 0.664);
+    background: #134e5e; /* fallback for old browsers */
+    background-color: -webkit-linear-gradient(
+        to top,
+        #71b280,
+        rgb(79, 88, 69),
+        #134e5e
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to top,
+        #71b280,
+        rgb(79, 88, 69),
+        #134e5e
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 40px;
+}
+
+#landing-header h1:hover {
+    background: #71b280; /* fallback for old browsers */
+    background-color: -webkit-linear-gradient(
+        to top,
+        #134e5e,
+        #71b280,
+        rgb(79, 88, 69)
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to top,
+        #134e5e,
+        #71b280,
+        rgb(79, 88, 69)
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#welcomeNote {
+    max-width: 62%;
+}
+a,
+u {
+    text-decoration: none;
+}
+a {
+    text-decoration: none !important;
+}
+
+a#toProducts:link {
+    color: #71b280;
+}
+a#toProducts:visited {
+    color: #71b280;
+}
+
+a#toProducts:hover {
+    color: #134e5e;
+}
+
+.carousel {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.carousel li {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 50s linear infinite;
+}
+
+.carousel li:nth-child(1) {
+    background-image: url("https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80");
+    background-position-y: -75vh;
+}
+.carousel li:nth-child(2) {
+    background-image: url("https://images.unsplash.com/photo-1539185441755-769473a23570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80");
+    background-position-y: -66vh;
+    animation-delay: 10s;
+}
+.carousel li:nth-child(3) {
+    background-image: url("https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    animation-delay: 20s;
+}
+.carousel li:nth-child(4) {
+    background-image: url("https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    animation-delay: 30s;
+}
+.carousel li:nth-child(5) {
+    background-image: url("https://images.unsplash.com/photo-1518049362265-d5b2a6467637?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=987&q=80");
+    animation-delay: 40s;
+}
+
+@keyframes imageAnimation {
+    0% {
+        opacity: 0;
+        animation-timing-function: ease-in;
+    }
+    10% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+    20% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+    opacity: 1;
+}

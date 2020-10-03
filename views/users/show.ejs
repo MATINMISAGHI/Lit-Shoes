@@ -1,0 +1,50 @@
+<%- include ("../partials/header") %>
+
+<div class="text-center jumbotron" id="usersJumbo">
+    <h1 class="mb-3 font-weight-normal"><%= user.username %>'s Profile</h1>
+    <label for="follow" class="sr-only">Follow This User</label>
+    <a id="follow" href="/follow/<%= user.id %>"><button class="btn btn-outline-success">Follow
+            <%= user.username %></button></a>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5 col-md-7 card mb-3 card-body">
+            <h3 class="card-title"><%= user.firstName + " " + user.lastName %></h3>
+
+            <div class="figure">
+                <img class="card-img-top figure-img img-fluid rounded" src="<%= user.avatar %>"
+                    alt="user profile image">
+                <address>
+                    <label for="email" class="sr-only">Email This User</label>
+                    <div class="figure-caption"> <a id="email" href="mailto:<%= user.email %>"><%= user.email %></a>
+                    </div>
+                </address>
+
+                <div class=" figure-caption">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, ex odit tempore dignissimos, ab
+                    nam aut quia
+                    necessitatibus provident maiores dolores architecto aliquam recusandae dolore voluptatibus!
+                    Repellendus quae
+                    assumenda exercitationem.
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-5">
+            <h3><%= user.username %>'s products</h3>
+            <ul>
+                <% products.forEach(function(product) { %>
+                <li>
+                    <a href="/products/<%= product.slug %>"><%= product.name %></a>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+        <div class="my-4">
+            <label for="goBK" class="sr-only">Go Back</label>
+            <a id="goBK" class="btn btn-outline-success btn-sm" href="/products">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<%- include ("../partials/footer") %>

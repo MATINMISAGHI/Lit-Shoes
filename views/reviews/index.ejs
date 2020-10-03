@@ -1,0 +1,92 @@
+<%- include ("../partials/header") %>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12 my-1">
+            <h3 class="text-center font-weight-normal mb-3">Review Page for "<em><%= product.name %></em>"</h3>
+            <a href="/products/<%= product.slug %>"> <span class="border border-success"><i
+                        class="fas fa-arrow-left"></i></span> Go back to this product's page</a>
+            <div class="card my-3">
+                <div class="card-body">
+                    <% if (product.rating === 0) { %>
+                    <h5 class="text-muted">
+                        <em>No reviews yet.</em>
+                    </h5>
+                    <% } else { %>
+                    <p>
+                        <span class="fas fa-star checked"></span>
+                        <span
+                            class="fas fa-star <% if (product.rating > 1.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                        <span
+                            class="fas fa-star <% if (product.rating > 2.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                        <span
+                            class="fas fa-star <% if (product.rating > 3.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                        <span
+                            class="fas fa-star <% if (product.rating > 4.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                        <em>(total reviews: <%= product.reviews.length %>)</em>
+                    </p>
+                    <p>
+                        Current product rating: <strong><%= product.rating.toFixed(2) %></strong>
+                    </p>
+                    <p class="card-title">
+                    <h4 class="font-weight-normal ">All reviews for this shoe:</h4>
+                    </p>
+                    <hr class="mt-0">
+                    <div class="card-text">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <% product.reviews.forEach(function(review){ %>
+                                <div class="card mb-2">
+                                    <div class="card-body">
+                                        <div class="float-left col-md-9">
+                                            <%- '<span class="fas fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="far fa-star"></span>'.repeat(5 - review.rating) %>
+                                            <div class="card-title">Review by:
+                                                <strong><%= review.author.username %></strong></div>
+                                            <p class="no-wrap float-left card-text">
+                                                <%= review.text %>
+                                            </p>
+                                        </div>
+                                        <div class="float-right">
+                                            <span><em><%= review.updatedAt.toDateString() %></em></span>
+                                            <div class="pt-3">
+                                                <% if(currentUser && review.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                                                <a class="btn btn-sm btn-warning p-0" id="reviewColorFix"
+                                                    href="/products/<%=product.slug %>/reviews/<%=review._id %>/edit">Edit</a>
+                                                <form id="delete-form"
+                                                    action="/products/<%=product.slug %>/reviews/<%=review._id %>?_method=DELETE"
+                                                    method="POST">
+                                                    <input type="submit" class="btn btn-sm btn-danger p-0"
+                                                        value="Delete">
+                                                </form>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                <div class="col-md-12 mt-3">
+
+                                    <% } %>
+                                    <div class="mb-2">
+                                        <a class="btn btn-outline-success <% if (currentUser && product.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
+                                            href="/products/<%= product.slug %>/reviews/new">
+                                            Write a New Review</a>
+                                    </div>
+                                    <div class="mt-2">
+                                        <a class="btn btn-sm btn-outline-success"
+                                            href="/products/<%= product._slug %>"><i class="fas fa-arrow-left"></i>
+                                            Home </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ("../partials/footer") %>
