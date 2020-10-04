@@ -5,23 +5,19 @@
 </div>
 <header class="jumbotron" id="homeJumbo">
     <div class="container">
-
         <label for="newProduct" class="sr-only">Add New Product</label>
         <form action="/products/new" method="GET">
             <input id="newProduct" type="submit" class="btn btn-lg btn-dark mb-3" value="Add New Product">
         </form>
-
-
         <form action="/products" method="GET" class="form-inline" id="product-search">
             <div class="form-group input-group input-group-lg ">
                 <label for="searchBar" class="sr-only">Search Products</label>
                 <input id="searchBar" type="text" name="search" placeholder="🔎Shoes, Seller, Location"
-                    class="form-control rounded-pill border-info col-md-12 col-6 col-sm-8">
+                    class="form-control rounded-pill col-md-12 col-6 col-sm-8">
                 <label for="search" class="sr-only">Search it</label>
                 <input id="search" type="submit" value="Search" class="btn btn-lg btn-dark ml-1">
             </div>
         </form>
-
     </div>
 </header>
 
