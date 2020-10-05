@@ -66,12 +66,12 @@ router.post(
                     review.author.id = req.user._id;
                     review.author.username = req.user.username;
                     review.product = product;
-                    //save review
+                    //makes sure to save review
                     review.save();
                     product.reviews.push(review);
                     // calculate the new average review for the product
                     product.rating = calculateAverage(product.reviews);
-                    //save product
+                    //make sure to save product
                     product.save();
                     req.flash(
                         "success",
@@ -120,7 +120,7 @@ router.put("/:review_id", middleware.checkReviewOwnership, function (req, res) {
                     }
                     // recalculate product average
                     product.rating = calculateAverage(product.reviews);
-                    //save changes
+                    //make sure to save changes
                     product.save();
                     req.flash(
                         "success",
@@ -155,7 +155,7 @@ router.delete("/:review_id", middleware.checkReviewOwnership, function (
                 }
                 // recalculate product average
                 product.rating = calculateAverage(product.reviews);
-                //save changes
+                //make sure to save changes
                 product.save();
                 req.flash("success", "Your review was deleted successfully.");
                 res.redirect("/products/" + req.params.slug);

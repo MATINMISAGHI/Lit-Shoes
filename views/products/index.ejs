@@ -68,13 +68,13 @@
         <% } else { %>
         <li><a class="page-link" href="/products<%if(search){%>?search=<%=search%><%}%>">First</a></li>
         <% } %>
- 
+
         <% if (current === 1) { %>
         <li class=" page-item disabled"><a class="page-link">«</a></li>
         <% } else { %>
         <li><a class="page-link" href="/products?page=<%= Number(current) - 1 %><%if(search){%>&search=<%=search%><%}%>">«</a></li>
         <% } %>
- 
+
         <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
         <% if (i !== 1) { %>
         <li class=" page-item disabled"><a class="page-link">...</a></li>
@@ -96,7 +96,7 @@
         <% } else { %>
         <li><a class="page-link" href="/products?page=<%= Number(current) + 1 %><%if(search){%>&search=<%=search%><%}%>">»</a></li>
         <% } %>
- 
+
         <% if (current === pages) { %>
         <li class=" page-item disabled"><a class="page-link">Last</a></li>
         <% } else { %>

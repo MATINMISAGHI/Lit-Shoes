@@ -1,4 +1,4 @@
-/* //////////// General CSS //////////// */
+/* * //////////// General CSS //////////// */
 /* Google Fonts imported into CSS */
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap");
 
@@ -26,7 +26,7 @@ a:visited {
 a:link {
     color: #1d1d1d;
 }
-/* ///////////// End of General CSS ///////////// */
+/* * ///////////// End of General CSS ///////////// */
 
 /* Views-->products-->index */
 .cardImg {
@@ -39,7 +39,8 @@ a:link {
     font-family: "Great Vibes", cursive;
     font-size: 4.5rem;
     font-weight: 500;
-    color: #eeb738;
+    color: #ffc108;
+    text-shadow: 0.2px 0.2px 0.1px orangered;
 }
 
 .container .text-muted {
@@ -59,7 +60,7 @@ a:link {
     padding: 9px;
 }
 
-/* ////////////// Navigation Bar ///////////// */
+/* ! ////////////// Navigation Bar ///////////// */
 .navbar {
     background-color: #1d1d1d;
 }
@@ -67,17 +68,17 @@ a:link {
 #homeNav a {
     font-size: 1.2rem;
     color: white;
-    padding: 1rem 0rem;
+    padding: 0.6rem 0rem;
 }
 
 #homeNav a:hover {
     cursor: pointer;
-    color: #eeb738;
+    color: #ffc108;
     text-shadow: 0.7px 0.7px 0.7px white;
 }
-/* //////////// End of Navigation Bar //////////// */
+/* ! //////////// End of Navigation Bar //////////// */
 
-/* ////////// Home Page Jumbo //////////  */
+/* * ////////// Home Page Jumbo //////////  */
 #homeJumbo {
     background-image: url("https://images.unsplash.com/photo-1499013819532-e4ff41b00669?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80");
     background-position-y: 87vh;
@@ -91,9 +92,9 @@ a:link {
     text-shadow: 0.7px 0.7px 0.4px white;
     border: 1px ridge white;
 }
-/* /////////// End of Jumbo /////////////// */
+/* * /////////// End of Jumbo /////////////// */
 
-/*///////////// Footer Section /////////////*/
+/* ? ///////////// Footer Section /////////////*/
 .footer {
     /* Make it sticky */
     position: absolute;
@@ -111,12 +112,12 @@ a:link {
 }
 .footer a:hover {
     text-decoration: none;
-    color: #eeb738;
+    color: #ffc108;
     text-shadow: 0.7px 0.7px 0.7px white;
 }
-/*///////// End of Footer Section //////////*/
+/* ? ///////// End of Footer Section //////////*/
 
-/* ///////////// Custom Forms Used Multiple Times ////////////// */
+/* ! ///////////// Custom Forms Used Multiple Times ////////////// */
 .form-signin {
     width: 100%;
     max-width: 330px;
@@ -133,41 +134,16 @@ a:link {
 .form-signin .form-control:focus {
     z-index: 2;
 }
-/* //////////////// End of Custom Forms /////////////// */
-
-#editBTN:visited {
-    color: rgb(19, 18, 18);
-}
-#editBTN:link {
-    color: rgb(19, 18, 18);
-}
-
-#reviewColorFix:visited {
-    color: rgb(19, 18, 18);
-}
-#reviewColorFix:link {
-    color: rgb(19, 18, 18);
-}
-#editComment:visited {
-    color: rgb(19, 18, 18);
-}
-#editComment:link {
-    color: rgb(19, 18, 18);
-}
-
+/* ! //////////////// End of Custom Forms /////////////// */
 .no-wrap {
     white-space: pre-line;
     overflow: auto;
     word-wrap: normal;
 }
 
-#delete-form {
-    display: inline;
-}
-
 /* The star rating */
 .checked {
-    color: #eeb738;
+    color: #ffc108;
 }
 
 /* Google Map styles */
@@ -176,7 +152,7 @@ a:link {
     width: 100%;
 }
 
-/* Product show page delete button */
+/* Product show page delete buttons (puts edit & dlt next to each other) */
 .delete-form {
     display: inline-block;
 }

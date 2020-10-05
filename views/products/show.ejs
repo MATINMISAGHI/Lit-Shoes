@@ -1,5 +1,5 @@
 <%- include ("../partials/header") %>
-
+<!-- !This needs to go -->
 <div class="row">
     <div class="col-md-3 col-sm-3">
         <p class="lead text-center"> <%= product.location %> </p>
@@ -24,11 +24,11 @@
             <img class="card-img-top" src="<%= product.image %>" alt="image of <%= product.name %>">
             <div class="card-body">
                 <h5 class="float-right">
-                    $<%= product.price %>/night
+                    Price: $<%= product.price %>
                 </h5>
                 <h5 class="card-title"><%= product.name %></h5>
                 <div class="float-right">
-                    <button type="button" class="badge badge-success badge-pill" data-toggle="modal"
+                    <button type="button" class="badge badge-pill badge-outline-dark" data-toggle="modal"
                         data-target="#productLikes">
                         <span>Total likes: <i class="far fa-thumbs-up"></i> <%= product.likes.length %></span>
                     </button>
@@ -39,11 +39,11 @@
                             <% if (currentUser && product.likes.some(function (like) {
                                 return like.equals(currentUser._id)
                             })) { %>
-                            <button class="btn btn-sm btn-success">
+                            <button class="btn btn-sm btn-dark">
                                 <i class="far fa-thumbs-up"></i> Liked (<%= product.likes.length %>)
                             </button>
                             <% } else { %>
-                            <button class="btn btn-sm btn-outline-success">
+                            <button class="btn btn-sm btn-outline-dark">
                                 <i class="far fa-thumbs-up"></i> Like (<%= product.likes.length %>)
                             </button>
                             <% } %>
@@ -63,19 +63,19 @@
                 <hr>
                 <p class="card-text no-wrap"><%= product.description %></p>
                 <% if(currentUser && product.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-                <label for="editProduct" class="sr-only">Edit </label>
-                <a id="editBTN" class="btn btn-sm btn-warning btnColorFix" href="/products/<%= product.slug %>/edit"
+                <label for="editBTN" class="sr-only">Edit </label>
+                <a id="editBTN" class="btn btn-sm btn-outline-dark p-1" href="/products/<%= product.slug %>/edit"
                     role="button"> Edit </a>
                 <form action="/products/<%= product.slug %>?_method=DELETE" method="POST" class="delete-form">
                     <label for="dltProduct" class="sr-only">Delete </label>
-                    <button id="dltProduct" class="btn-sm btn-danger">Delete</button>
+                    <button id="dltProduct" class="btn btn-sm btn-outline-danger p-1">Delete</button>
                 </form>
                 <% } %>
             </div>
         </div>
 
-        <div class="progress">
-            <div class="progress-bar bg-dark mx-auto" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+        <div class="progress" style="height: 3px;">
+            <div class="progress-bar bg-warning mx-auto" role="progressbar" aria-valuenow="75" aria-valuemin="0"
                 aria-valuemax="100" style="width: 100%;"></div>
         </div>
 
@@ -84,17 +84,17 @@
             <div class="card-body">
                 <!--Setting up the add new comment button that is used for collapsing-->
                 <div>
-                    <label for="newComment" class="sr-only">Add New Comment</label>
-                    <a id="newComment" class="btn btn-outline-success float-right" role="button" data-toggle="collapse"
+                    <label for="newComment" class="sr-only">Add Comment/Question</label>
+                    <a id="newComment" class="btn btn-outline-dark float-right" role="button" data-toggle="collapse"
                         href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
-                        <span aria-hidden="true"> <i class="fas fa-feather-alt"></i> </span> Add New Comment</a>
+                        <span aria-hidden="true">Add Comment/Question</a>
                     <!--Comment section title-->
-                    <h4><strong>Comments <span aria-hidden="true"> <i class="far fa-comments"></i> </span></strong></h4>
+                    <h4>Comments/Questions <span aria-hidden="true"> </span><i class="fas fa-question"></i></h4>
                 </div>
 
                 <!--Collapse Add a comment form START-->
                 <div class="collapse pt-2 col-10" id="collapseComment">
-                    <div class="card p-2" style="border-left: 5px solid #28a745;">
+                    <div class="card p-2" style="border-left: 5px solid #ffc108;">
                         <div class="card-body">
                             <% if(!currentUser) { %>
                             <!--If the user is not logged in, direct him to the login page-->
@@ -120,7 +120,7 @@
                                             col="70"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-outline-success btn-sm">Post Comment</button>
+                                        <button class="btn btn-outline-dark btn-sm">Post Comment</button>
                                     </div>
                                 </form>
                             </div>
@@ -133,7 +133,7 @@
                 <hr>
                 <!--Check if there are comments, if there are none say no comments.-->
                 <% if (product.comments.length === 0) { %>
-                <p class="text-muted"><em>No comments yet!</em></p>
+                <p class="text-muted"><em>No Comments/Questions yet!</em></p>
                 <% } %>
                 <!--Display comments by looping through them-->
                 <div class="row">
@@ -144,7 +144,7 @@
                                 <div class="float-left">
                                     <p class="card-title"><a href="/users/<%= comment.author.id %>"><img
                                                 src="<%= comment.author.avatar %>">
-                                            <%= comment.author.username %></a></p>
+                                            <strong><%= comment.author.username %></strong></a></p>
                                     <% console.log(comment.author.username) %>
                                     <p class="card-text no-wrap"><%= comment.text %></p>
                                 </div>
@@ -154,7 +154,7 @@
                                     <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                                     <!--Edit button used for collapsing the edit comment form-->
                                     <label for="editComment" class="sr-only">Edit Comment</label>
-                                    <a id="editComment" class="btnColorFix btn btn-sm btn-warning p-0" role="button"
+                                    <a id="editComment" class="btn btn-sm btn-outline-dark p-1" role="button"
                                         data-toggle="collapse" href="#collapseEdit<%= comment._id %>"
                                         aria-expanded="false" aria-controls="collapse<%= comment._id %>">
                                         Edit</a>
@@ -163,11 +163,12 @@
                                         action="/products/<%=product.slug%>/comments/<%=comment._id%>?_method=DELETE"
                                         method="POST">
                                         <label for="dltComment" class="sr-only">Delete Comment</label>
-                                        <button id="dltComment" class="btn btn-sm btn-danger p-0">Delete</button>
+                                        <button id="dltComment"
+                                            class="btn btn-sm btn-outline-danger p-1">Delete</button>
                                     </form>
                                     <!--Edit comment form-->
                                     <div class="collapse col-md-10 float-left" id="collapseEdit<%= comment._id %>">
-                                        <div class="card p-2" style="border-left: 5px solid #ffbb33; margin-top: 15px;">
+                                        <div class="card p-2" style="border-left: 5px solid #ffc108; margin-top: 15px;">
                                             <div class="card-body">
                                                 <div class="card-title">
                                                     <h4>Edit your comment <span aria-hidden="true"><i
@@ -188,7 +189,7 @@
                                                                 cols="70"><%= comment.text %></textarea>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button class="btn btn-outline-warning btn-sm">Edit comment
+                                                            <button class="btn btn-outline-dark btn-sm">Edit comment
                                                             </button>
                                                         </div>
                                                     </form>
@@ -207,8 +208,8 @@
         </div>
         <!--COMMENT SECTION END-->
 
-        <div class="progress">
-            <div class="progress-bar bg-dark mx-auto " role="progressbar" aria-valuenow="75" aria-valuemin="0"
+        <div class="progress" style="height: 3px;">
+            <div class="progress-bar bg-warning mx-auto" role="progressbar" aria-valuenow="75" aria-valuemin="0"
                 aria-valuemax="100" style="width: 100%;"></div>
         </div>
 
@@ -238,7 +239,7 @@
                             Current product rating: <strong><%= product.rating.toFixed(2) %></strong>
                         </p>
                         <p class="card-title">
-                        <h4>Latest reviews for this shoe:</h4>
+                        <h4>Latest reviews for this shoe <span><i class="far fa-comments"></i></span>:</h4>
                         </p>
                         <hr class="mt-0">
                         <div class="card-text">
@@ -248,9 +249,14 @@
                                     <div class="card mb-2">
                                         <div class="card-body">
                                             <div class="float-left col-md-9">
-                                                <%- '<span class="fas fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="far fa-star"></span>'.repeat(5 - review.rating) %>
-                                                <div class="card-title">Review by:
-                                                    <strong><%= review.author.username %></strong></div>
+                                                <%- '<span class="fas fa-star checked"></span>'.repeat(review.rating) %>
+                                                <%- '<span class="far fa-star"></span>' .repeat(5 - review.rating) %>
+                                                <div class="card-title">
+                                                    Review by:
+                                                    <a href="/users/<%= review.author.id %>" role="submit">
+                                                        <strong><%= review.author.username %></strong>
+                                                    </a>
+                                                </div>
                                                 <p class="no-wrap float-left card-text">
                                                     <%= review.text %>
                                                 </p>
@@ -259,12 +265,13 @@
                                                 <span><em><%= review.updatedAt.toDateString() %></em></span>
                                                 <div class="pt-3">
                                                     <% if(currentUser && review.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-                                                    <a class="btn btn-sm btn-warning p-0" id="reviewColorFix"
-                                                        href="/products/<%=product.slug %>/reviews/<%=review._id %>/edit">Edit</a>
-                                                    <form id="delete-form"
+                                                    <a class="btn btn-sm btn-outline-dark p-1""
+                                                        href="
+                                                        /products/<%=product.slug %>/reviews/<%=review._id %>/edit">Edit</a>
+                                                    <form class="delete-form"
                                                         action="/products/<%=product.slug %>/reviews/<%=review._id %>?_method=DELETE"
                                                         method="POST">
-                                                        <input type="submit" class="btn btn-sm btn-danger p-0"
+                                                        <input type="submit" class="btn btn-sm btn-outline-danger p-1"
                                                             value="Delete">
                                                     </form>
                                                     <% } %>
@@ -281,9 +288,9 @@
                                         </div>
                                         <% } %>
                                         <div class="mb-2">
-                                            <a class="btn btn-outline-success <% if (currentUser && product.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
-                                                href="/products/<%= product.slug %>/reviews/new">
-                                                Write a New Review</a>
+                                            <a class="btn btn-outline-dark <% if (currentUser && product.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
+                                                href="/products/<%= product.slug %>/reviews/new"><span><i
+                                                        class="fas fa-feather-alt"></i></span> Write a New Review</a>
                                         </div>
                                     </div>
                                 </div>
@@ -295,10 +302,10 @@
         </div>
     </div>
 </div>
-
-<div class="form-signin my-3 ">
-    <a href="/products">Go Back</a>
+<div class="form-signin p-3">
+    <a href="/products" class="btn btn-sm btn-outline-dark">Go Back</a>
 </div>
+
 <!-- Likes Modal-->
 <div id="productLikes" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -330,13 +337,14 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+
     function initMap() {
         var lat = <%= product.lat %>;
         var lng = <%= product.lng %>;
