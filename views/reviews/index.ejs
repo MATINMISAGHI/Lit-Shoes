@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12 my-1">
             <h3 class="text-center font-weight-normal mb-3">Review Page for "<em><%= product.name %></em>"</h3>
-            <a href="/products/<%= product.slug %>"> <span class="border border-success"><i
+            <a href="/products/<%= product.slug %>" class="btn btn-outline-dark"> <span><i
                         class="fas fa-arrow-left"></i></span> Go back to this product's page</a>
             <div class="card my-3">
                 <div class="card-body">
@@ -52,12 +52,12 @@
                                             <span><em><%= review.updatedAt.toDateString() %></em></span>
                                             <div class="pt-3">
                                                 <% if(currentUser && review.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-                                                <a class="btn btn-sm btn-warning p-0" id="reviewColorFix"
+                                                <a class="btn btn-sm btn-outline-dark p-1" id="reviewColorFix"
                                                     href="/products/<%=product.slug %>/reviews/<%=review._id %>/edit">Edit</a>
-                                                <form id="delete-form"
+                                                <form class="delete-form"
                                                     action="/products/<%=product.slug %>/reviews/<%=review._id %>?_method=DELETE"
                                                     method="POST">
-                                                    <input type="submit" class="btn btn-sm btn-danger p-0"
+                                                    <input type="submit" class="btn btn-sm btn-outline-danger p-1"
                                                         value="Delete">
                                                 </form>
                                                 <% } %>
@@ -70,13 +70,13 @@
 
                                     <% } %>
                                     <div class="mb-2">
-                                        <a class="btn btn-outline-success <% if (currentUser && product.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
+                                        <a class="btn btn-outline-dark <% if (currentUser && product.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
                                             href="/products/<%= product.slug %>/reviews/new">
                                             Write a New Review</a>
                                     </div>
                                     <div class="mt-2">
-                                        <a class="btn btn-sm btn-outline-success"
-                                            href="/products/<%= product._slug %>"><i class="fas fa-arrow-left"></i>
+                                        <a class="btn btn-sm btn-outline-dark" href="/products/<%= product._slug %>"><i
+                                                class="fas fa-arrow-left"></i>
                                             Home </a>
                                     </div>
                                 </div>

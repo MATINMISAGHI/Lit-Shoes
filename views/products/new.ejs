@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-12 text-center">
-        <h3 class="mb-3 font-weight-normal">Create a New Product</h3>
+        <h3 class="mb-3 font-weight-normal">Post a New Product</h3>
     </div>
     <div class="col-12">
         <form action="/products" class="form-signin" method="POST" enctype="multipart/form-data">
@@ -26,16 +26,15 @@
             </div>
             <div class="form-group">
                 <label for="prodLoca" class="sr-only"> Location</label>
-                <input class="form-control" id="prodLoca" type="text" name="product[location]"
-                    placeholder="San Francisco, CA">
+                <input class="form-control" id="prodLoca" type="text" name="product[location]" placeholder="location">
             </div>
             <div class="form-group">
-                <button class="btn btn-lg btn-outline-success btn-block">Submit!</button>
+                <button class="btn btn-lg btn-outline-dark btn-block">Submit!</button>
             </div>
         </form>
         <div class="form-signin">
             <label for="goBK" class="sr-only">Go Back</label>
-            <a href="/products">Go Back</a>
+            <a href="/products" class="btn btn-outline-dark">Go Back</a>
         </div>
     </div>
 </div>
