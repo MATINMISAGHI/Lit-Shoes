@@ -224,15 +224,15 @@
                         </h5>
                         <% } else { %>
                         <p>
-                            <span class="fas fa-star checked"></span>
+                            <span class="fas fa-star text-warning"></span>
                             <span
-                                class="fas fa-star <% if (product.rating > 1.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                                class="fas fa-star <% if (product.rating > 1.5) { %> text-warning <% } else { %> far fa-star <% } %>"></span>
                             <span
-                                class="fas fa-star <% if (product.rating > 2.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                                class="fas fa-star <% if (product.rating > 2.5) { %> text-warning <% } else { %> far fa-star <% } %>"></span>
                             <span
-                                class="fas fa-star <% if (product.rating > 3.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                                class="fas fa-star <% if (product.rating > 3.5) { %> text-warning <% } else { %> far fa-star <% } %>"></span>
                             <span
-                                class="fas fa-star <% if (product.rating > 4.5) { %> checked <% } else { %> far fa-star <% } %>"></span>
+                                class="fas fa-star <% if (product.rating > 4.5) { %> text-warning <% } else { %> far fa-star <% } %>"></span>
                             <em>(total reviews: <%= product.reviews.length %>)</em>
                         </p>
                         <p>
@@ -249,7 +249,7 @@
                                     <div class="card mb-2">
                                         <div class="card-body">
                                             <div class="float-left col-md-9">
-                                                <%- '<span class="fas fa-star checked"></span>'.repeat(review.rating) %>
+                                                <%- '<span class="fas fa-star text-warning"></span>'.repeat(review.rating) %>
                                                 <%- '<span class="far fa-star"></span>' .repeat(5 - review.rating) %>
                                                 <div class="card-title">
                                                     Review by:

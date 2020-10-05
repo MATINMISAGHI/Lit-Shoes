@@ -141,11 +141,6 @@ a:link {
     word-wrap: normal;
 }
 
-/* The star rating */
-.checked {
-    color: #ffc108;
-}
-
 /* Google Map styles */
 #map {
     height: 400px;
