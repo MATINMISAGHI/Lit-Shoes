@@ -37,8 +37,8 @@ async function seedDB() {
             let product = await Product.create(seed);
             console.log("Product created");
             let comment = await Comment.create({
-                text: "This place is great, but I wish there was internet",
-                author: "Homer",
+                text: "This product is great.",
+                author: "Pika",
             });
             console.log("Comment created");
             product.comments.push(comment);

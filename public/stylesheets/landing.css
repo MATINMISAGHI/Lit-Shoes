@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap");
+
 body {
-    background-color: darkslategrey;
+    background-color: black;
+    font-family: "Montserrat", sans-serif;
 }
 
 #landing-header {
@@ -12,59 +15,45 @@ body {
 #landing-header h1 {
     padding: 1vh;
     font-size: 3rem;
-    text-shadow: 1px 1px 4px rgba(92, 16, 39, 0.664);
-    background: #134e5e; /* fallback for old browsers */
+    text-shadow: 1px 1px 2px #1d1d1d;
+    background: #1d1d1d; /* fallback for old browsers */
     background-color: -webkit-linear-gradient(
         to top,
-        #71b280,
-        rgb(79, 88, 69),
-        #134e5e
+        #1d1d1d8e,
+        rgba(138, 110, 18, 0.541),
+        #ffc108be
     ); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
         to top,
-        #71b280,
-        rgb(79, 88, 69),
-        #134e5e
+        #1d1d1d8e,
+        rgba(138, 110, 18, 0.541),
+        #ffc108be
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 40px;
 }
 
-#landing-header h1:hover {
-    background: #71b280; /* fallback for old browsers */
-    background-color: -webkit-linear-gradient(
-        to top,
-        #134e5e,
-        #71b280,
-        rgb(79, 88, 69)
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-        to top,
-        #134e5e,
-        #71b280,
-        rgb(79, 88, 69)
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
 #welcomeNote {
-    max-width: 62%;
+    max-width: 48%;
+    position: relative;
+    top: 200px;
 }
 a,
 u {
-    text-decoration: none;
-}
-a {
     text-decoration: none !important;
 }
 
 a#toProducts:link {
-    color: #71b280;
+    color: #ffc10888;
+    text-shadow: 0.2px 0.2px 0.2px white;
 }
 a#toProducts:visited {
-    color: #71b280;
+    color: #ffc10888;
+    text-shadow: 0.2px 0.2px 0.2px white;
 }
 
 a#toProducts:hover {
-    color: #134e5e;
+    color: #ffc108;
+    text-shadow: 0.4px 0.4px 0.3px black;
 }
 
 .carousel {
@@ -95,11 +84,11 @@ a#toProducts:hover {
 
 .carousel li:nth-child(1) {
     background-image: url("https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80");
-    background-position-y: -75vh;
+    background-position-y: -70vh;
 }
 .carousel li:nth-child(2) {
     background-image: url("https://images.unsplash.com/photo-1539185441755-769473a23570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80");
-    background-position-y: -66vh;
+    background-position-y: -22vh;
     animation-delay: 10s;
 }
 .carousel li:nth-child(3) {
@@ -113,6 +102,7 @@ a#toProducts:hover {
 .carousel li:nth-child(5) {
     background-image: url("https://images.unsplash.com/photo-1518049362265-d5b2a6467637?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=987&q=80");
     animation-delay: 40s;
+    background-position-y: -122vh;
 }
 
 @keyframes imageAnimation {

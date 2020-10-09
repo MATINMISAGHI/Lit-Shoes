@@ -28,41 +28,6 @@ a:link {
 }
 /* * ///////////// End of General CSS ///////////// */
 
-/* Views-->products-->index */
-.cardImg {
-    width: 100%;
-    height: 180px;
-    background-size: cover;
-    background-position: center center;
-}
-#company-name {
-    font-family: "Great Vibes", cursive;
-    font-size: 4.5rem;
-    font-weight: 500;
-    color: #ffc108;
-    text-shadow: 0.2px 0.2px 0.1px orangered;
-}
-#company-name img {
-    opacity: 85%;
-}
-
-.container .text-muted {
-    margin: 20px 0;
-}
-
-/* Thumbnail styles */
-.thumbnail img {
-    width: 100%;
-}
-
-.thumbnail {
-    padding: 0;
-}
-
-.thumbnail .caption-full {
-    padding: 9px;
-}
-
 /* ! ////////////// Navigation Bar ///////////// */
 .navbar {
     background-color: #1d1d1d;
@@ -81,7 +46,7 @@ a:link {
 }
 /* ! //////////// End of Navigation Bar //////////// */
 
-/* * ////////// Home Page Jumbo //////////  */
+/* * ///////////// Home Page Jumbo /////////////  */
 #homeJumbo {
     background-image: url("https://images.unsplash.com/photo-1499013819532-e4ff41b00669?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80");
     background-position-y: 87vh;
@@ -95,9 +60,47 @@ a:link {
     text-shadow: 0.7px 0.7px 0.4px white;
     border: 1px ridge white;
 }
-/* * /////////// End of Jumbo /////////////// */
+/* * ///////////// End of Jumbo ////////////////// */
 
-/* ? ///////////// Footer Section /////////////*/
+/* todo ////////// Views-->products-->index ///////////// */
+.cardImg {
+    width: 100%;
+    height: 180px;
+    background-size: cover;
+    background-position: center center;
+}
+#company-name {
+    font-family: "Great Vibes", cursive;
+    font-size: 4.5rem;
+    font-weight: 500;
+    color: #ffc108;
+    text-shadow: 0.2px 0.2px 0.1px orangered;
+}
+#second-shoe {
+    transform: scaleX(-1);
+}
+/* todo //////////// End of main index page //////////// */
+
+/* ! ///////////// Custom Forms Used Multiple Times ////////////// */
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+/* ! //////////////// End of Custom Forms /////////////// */
+
+/* ? /////////////// Footer Section ///////////////*/
 .footer {
     /* Make it sticky */
     position: absolute;
@@ -118,26 +121,24 @@ a:link {
     color: #ffc108;
     text-shadow: 0.5px 0.5px 0.5px white;
 }
-/* ? ///////// End of Footer Section //////////*/
+/* ? /////////// End of Footer Section ////////////*/
 
-/* ! ///////////// Custom Forms Used Multiple Times ////////////// */
-.form-signin {
+.container .text-muted {
+    margin: 20px 0;
+}
+
+/* Thumbnail styles */
+.thumbnail img {
     width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
 }
-.form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
+
+.thumbnail {
+    padding: 0;
 }
-.form-signin .form-control:focus {
-    z-index: 2;
+
+.thumbnail .caption-full {
+    padding: 9px;
 }
-/* ! //////////////// End of Custom Forms /////////////// */
 .no-wrap {
     white-space: pre-line;
     overflow: auto;
