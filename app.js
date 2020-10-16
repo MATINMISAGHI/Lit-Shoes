@@ -60,7 +60,7 @@ var url = process.env.DATABASEURL || "mongodb://localhost:27017/shoes_db";
 mongoose
     .connect(url, {
         useNewUrlParser: true,
-        useUnifiedTopology: false,
+        useUnifiedTopology: true,
         useFindAndModify: false,
         useCreateIndex: true,
     })
