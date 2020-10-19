@@ -1,19 +1,14 @@
 <%- include ("../partials/header") %>
-<!-- !This needs to go -->
+<!-- !This needs to get shorter -->
 <div class="row">
     <div class="col-md-3 col-sm-3">
         <p class="lead text-center"> <%= product.location %> </p>
+        <p class="text-center">Going to meet today?</p>
         <div class="list-group mb-2">
             <li class="list-group-item bg-light"><span class="text-left">Temperature:</span> <span
                     class="float-right"><%= weatherData.main.temp %> ˚F </span></li>
             <li class="list-group-item bg-light"><span class="text-left">Weather Condition:</span> <span
                     class="float-right"><%= weatherData.weather[0].description %> </span></li>
-            <li class="list-group-item bg-light"><span class="text-left">Wind Speed:</span> <span
-                    class="float-right"><%= weatherData.wind.speed %> mph </span></li>
-            <li class="list-group-item bg-light"><span class="text-left">Humidity:</span> <span
-                    class="float-right"><%= weatherData.main.humidity %>% </span></li>
-            <li class="list-group-item bg-light"><span class="text-left">Pressure:</span> <span
-                    class="float-right"><%= weatherData.main.pressure %> hPa </span></li>
         </div>
         <div class="d-none d-sm-block" id="map"></div>
     </div>
